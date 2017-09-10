@@ -7,6 +7,7 @@
 
 package com.boast.task1;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import com.boast.Converter;
 
@@ -16,12 +17,14 @@ public class Main {
 
         System.out.print("Enter number to convert: ");
 
-        Scanner in = new Scanner(System.in);
-        int number = in.nextInt();
-
-        System.out.println("Decimal: " + number);
-        System.out.println("Binary: " + Converter.decToBin(number));
-        System.out.println("Octal: " + Converter.decToOct(number));
-        System.out.println("Hexadecimal: " + Converter.decToHex(number));
+        try (Scanner in = new Scanner(System.in)) {
+            int number = in.nextInt();
+            System.out.println("Decimal: " + number);
+            System.out.println("Binary: " + Converter.decToBin(number));
+            System.out.println("Octal: " + Converter.decToOct(number));
+            System.out.println("Hexadecimal: " + Converter.decToHex(number));
+        } catch (InputMismatchException e){
+            System.out.println("Invalid input");
+        }
     }
 }
